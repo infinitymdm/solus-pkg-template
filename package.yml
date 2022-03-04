@@ -1,0 +1,64 @@
+name       : example-pkg # Mandatory. Change this to the software's package name. Should match upstream if possible.
+version    : 0.0.0 # Mandatory. Change this to the software's version.
+release    : 1 # Mandatory. Change this to the current release number in the Solus package database. If building locally, leave this alone.
+source     :
+    - https://github.com : hashgoeshere # Mantadory. Change this to a link to the tar.gz and the SHA 256 hash of the tar.gz.
+homepage   : https://github.com # Optional, but highly recommended. Change this to a link to the software's homepage.
+license    : 
+    - MIT # Mandatory. Change this to a license identifier from https://spdx.org/licenses/.
+component  : 
+    - desktop # Mandatory. Change this to an appropriate component group. Use eopkg lc to see all available component groups.
+summary    : 
+    - An example package. # Mandatory. Change this to a brief one-line summary or display name for the package.
+description: |
+    This example package should help you generate packages for Solus Linux. Just replace things with the appropriate values for the software you're trying to package. Address each comment, and remove unnecessary keys. See https://getsol.us/articles/packaging/package.yml/en/ for more information on what each key does. Finally, don't forget to update this description to something appropriate for the software you're packaging.
+debug      : no # Optional. Not documented. I assume this enables/disables debug output from the built package? Usually you'll remove this.
+clang      : yes # Optional. Default is no. Tells solbuild to use clang for building. Usually you'll remove this.
+extract    : no # Optional. Default is yes. Tells solbuild whether to extract the tar.gz automatically. Usually you'll remove this.
+autodep    : no # Optional. Default is yes. Tells solbuild whether to automatically find dependencies. Usually you'll remove this.
+emul32     : yes # Optional. Default is no. Tells solbuild whether to build 32-bit libraries. Usually you'll remove this.
+libsplit   : no # Optional. Default is yes. Tells solbuild whether to split libraries into devel subpackages. Usually you'll remove this.
+networking : yes # Optional. Default is no. Tells solbuild whether to use an isolated, no-network environment. Usually you'll remove this.
+strip      : no # Optional. Default is yes. Tells solbuild to strip drivers from the installed package. Usually you'll remove this.
+conflicts  : # Optional, except for when it's not. Used to list packages that cannot be installed alongside this. Usually you'll remove this.
+    - list
+    - conflicting
+    - packages
+    - here
+replaces   : # Optional. Used to replace or rename packages when deprecating. Usually you'll remove this.
+    - list
+    - deprecated
+    - packages
+    - here
+patterns   : # Optional. Used to fine-tune file placement. Useful for development packages. Usually you'll remove this.
+    - list/patterns
+    - right/here
+builddeps  : # Optional, except it's almost always required. Used to list build dependencies. See https://getsol.us/articles/packaging/packaging-practices/en/#build-dependencies
+    - list
+    - build
+    - dependences
+    - here
+rundeps    : # Optional, except for when it's not. Used to list runtime dependencies. Usually you'll remove this.
+    - list
+    - runtime
+    - dependencies
+    - here
+environment: |
+    # Optional. Used to specify code that runs before each packaging step. Usually you'll remove this.
+    echo "example environment code"
+setup      : |
+    # Optional. Used to perform setup tasks to prep for build.
+    echo "example setup"
+build      : |
+    # Optional, except it's almost always required. Used to do compilation tasks, e.g. make. See https://getsol.us/articles/packaging/package.yml/en/#macros for helpful macros.
+    %make
+install    : |
+    # Optional, except it's almost always required. Used to place files in the appropriate dirs and link binaries after compiling.
+    ln -s bin/example $installdir/usr/bin/example
+    # Don't forget that desktop apps require a .desktop file and icons!
+check      : |
+    # Optional, but you'll use it if you're being kind to future maintainers. Used to test and check the install.
+    echo "example check: nothing to see here"
+profile    : |
+    # Optional. Used to specify profiling tests. 
+    echo "example profile: nothing to test here"
